@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrearOrden.UseCasesDTOs\CrearOrden.UseCasesDTOs.csproj" />
+    <ProjectReference Include="..\CrearOrdern.Entities\CrearOrden.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
