@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CrearOrden.Controllers\CrearOrden.Controllers.csproj" />
     <ProjectReference Include="..\CrearOrden.InversionOfControl\CrearOrden.InversionOfControl.csproj" />
     <ProjectReference Include="..\CreatOrden.WebExceptionsPresenter\CrearOrden.WebExceptionsPresenter.csproj" />
   </ItemGroup>

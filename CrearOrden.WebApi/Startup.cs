@@ -30,21 +30,10 @@ namespace CrearOrden.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers(
-                options => options.Filters.Add(
-                    new ApiExceptionFilterAttribute(
-                        new Dictionary<Type, IExceptionHandler>
-                        {
-                            { typeof(GeneralException), new GeneralExceptionHandler()},
-                            { typeof(ValidationException), new ValidationExceptionHandler()},
-                        }
-                        )
-                    )
-                );
+            services.AddControllers(options => options.AddFilters());
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrearOrden.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrearOrden.WebApi", Version = "v2" });
             });
             services.AddServices(Configuration);
         }
@@ -56,7 +45,7 @@ namespace CrearOrden.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CrearOrden.WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CrearOrden.WebApi v2"));
             }
 
             app.UseHttpsRedirection();

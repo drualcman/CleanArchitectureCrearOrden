@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CreateOrden.UseCases.CreateOrder
 {
-    public class CreateOrderHandlerInteractor : IRequestHandler<CreateOrderRequestInputPort, int>
+    public class CreateOrderHandlerInteractor :  AsyncRequestHandler<CreateOrderRequestInputPort>
     {
         readonly IOrderRepository OrderRepository;
         readonly IOrderDetailRepository OrderDetailRepository;
@@ -20,22 +20,22 @@ namespace CreateOrden.UseCases.CreateOrder
             IOrderDetailRepository orderDetailRepository, IUnitOfWork unitOfWork) =>
             (OrderRepository, OrderDetailRepository, UnitOfWork) = (orderRepository, orderDetailRepository, unitOfWork);
 
-        public async Task<int> Handle(CreateOrderRequestInputPort request, CancellationToken cancellationToken)
+        protected async override Task Handle(CreateOrderRequestInputPort request, CancellationToken cancellationToken)
         {
             Order order = new Order
             {
-                CustomerId = request.CustomerId,
+                CustomerId = request.RequestData.CustomerId,
                 OrderDate = DateTime.Now,
-                ShipAddress = request.ShipAddress,
-                ShipCity = request.ShipCity,
-                ShipCountry = request.ShipCountry,
-                ShipPostalCode = request.ShipPostalCode,
+                ShipAddress = request.RequestData.ShipAddress,
+                ShipCity = request.RequestData.ShipCity,
+                ShipCountry = request.RequestData.ShipCountry,
+                ShipPostalCode = request.RequestData.ShipPostalCode,
                 ShippingType = CrearOrden.Entities.Enums.ShippingType.Road,
                 DiscountType = CrearOrden.Entities.Enums.DiscountType.Percentage,
                 Discount = 10
             };
             OrderRepository.Create(order);
-            foreach (var item in request.OrderDetails)
+            foreach (var item in request.RequestData.OrderDetails)
             {
                 OrderDetailRepository.Create(new OrderDetail
                 {
@@ -53,7 +53,8 @@ namespace CreateOrden.UseCases.CreateOrder
             {
                 throw new GeneralException("Error al crear la orden", ex.Message);
             }
-            return order.Id;
+            request.OutputPort.Handle(order.Id);
         }
+
     }
 }
