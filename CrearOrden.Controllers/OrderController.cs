@@ -1,7 +1,7 @@
 ﻿using CrearOrden.Presenters;
+using CrearOrden.UseCases.Ports.CreateOrder;
 using CrearOrden.UseCasesDTOs.CreateOrder;
 using CreateOrden.UseCases.CreateOrder;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -12,15 +12,19 @@ namespace CrearOrden.Controllers
     [ApiController]
     public class OrderController
     {
-        readonly IMediator Mediator;
-        public OrderController(IMediator mediator) =>
-            Mediator = mediator;
+        readonly ICreateOrderInputPort InputPort;
+        readonly ICreateOrderOutputPort OutputPort;
+        public OrderController(ICreateOrderInputPort inputPort, ICreateOrderOutputPort outputPort) =>
+            (InputPort, OutputPort) = (inputPort, outputPort);
 
         [HttpPost("create-order")]
         public async Task<string> CreateOrder(CreateOrderParams orderParams)
         {
-            CreateOrderPresenter presenter = new CreateOrderPresenter();
-            await Mediator.Send(new CreateOrderRequestInputPort(orderParams, presenter));
+            await InputPort.Handle(orderParams);
+            //hacer uso del polimorfismo
+            //como createorderpresenter implenta las 2 interfaces gracias a la injeccion de dependencias
+            //podremos acceder a la otra interfaz que es la que va a mostrar los datos
+            IPresenter<string> presenter = OutputPort as CreateOrderPresenter;
             return presenter.Content;
         }
     }

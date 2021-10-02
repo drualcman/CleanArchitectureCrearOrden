@@ -1,10 +1,9 @@
-﻿using CreateOrden.UseCases.Common.Ports;
-using System;
+﻿using System;
 
 namespace CrearOrden.Presenters
 {
-    public interface IPresenter<ResponseType, FormatType> : IOutputPort<ResponseType>
+    public interface IPresenter<FormatDataType>
     {
-        public FormatType Content { get; }
+        public FormatDataType Content { get; }
     }
 }

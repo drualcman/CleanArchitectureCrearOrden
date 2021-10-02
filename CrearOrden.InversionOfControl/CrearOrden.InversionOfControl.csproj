@@ -6,12 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.3" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CrearOrden.Presenters\CrearOrden.Presenters.csproj" />
     <ProjectReference Include="..\CrearOrden.Repositories.EFCore\CrearOrden.Repositories.EFCore.csproj" />
     <ProjectReference Include="..\CreateOrden.UseCases\CreateOrden.UseCases.csproj" />
   </ItemGroup>

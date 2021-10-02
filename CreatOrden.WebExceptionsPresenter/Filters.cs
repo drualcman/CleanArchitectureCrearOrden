@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CrearOrden.WebExceptionsPresenter
 {
-    public static class FiltersControllers
+    public static class Filters
     {
-        public static void AddFilters(this MvcOptions options)
+        public static void Register(MvcOptions options)
         {
             options.Filters.Add(
                     new ApiExceptionFilterAttribute(
@@ -20,9 +20,7 @@ namespace CrearOrden.WebExceptionsPresenter
                         {
                             { typeof(GeneralException), new GeneralExceptionHandler()},
                             { typeof(ValidationException), new ValidationExceptionHandler()},
-                        }
-                        )
-                    );
+                        }));
         }
     }
 }

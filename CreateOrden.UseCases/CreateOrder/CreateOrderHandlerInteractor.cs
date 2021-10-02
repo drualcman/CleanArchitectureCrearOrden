@@ -1,7 +1,10 @@
 ﻿using CrearOrden.Entities.Exceptions;
 using CrearOrden.Entities.Interfaces;
 using CrearOrden.Entities.POCOEntities;
-using MediatR;
+using CrearOrden.UseCases.Ports.CreateOrder;
+using CrearOrden.UseCasesDTOs.CreateOrder;
+using CreateOrden.UseCases.Common.Validators;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,31 +14,41 @@ using System.Threading.Tasks;
 
 namespace CreateOrden.UseCases.CreateOrder
 {
-    public class CreateOrderHandlerInteractor :  AsyncRequestHandler<CreateOrderRequestInputPort>
+    public class CreateOrderHandlerInteractor : ICreateOrderInputPort
     {
         readonly IOrderRepository OrderRepository;
         readonly IOrderDetailRepository OrderDetailRepository;
         readonly IUnitOfWork UnitOfWork;
-        public CreateOrderHandlerInteractor(IOrderRepository orderRepository,
-            IOrderDetailRepository orderDetailRepository, IUnitOfWork unitOfWork) =>
-            (OrderRepository, OrderDetailRepository, UnitOfWork) = (orderRepository, orderDetailRepository, unitOfWork);
+        readonly ICreateOrderOutputPort OutputPort;
+        readonly IEnumerable<IValidator<CreateOrderParams>> Validators;
 
-        protected async override Task Handle(CreateOrderRequestInputPort request, CancellationToken cancellationToken)
+        public CreateOrderHandlerInteractor(IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository, IUnitOfWork unitOfWork,
+            ICreateOrderOutputPort outputPort, IEnumerable<IValidator<CreateOrderParams>> validators) =>
+            (OrderRepository, OrderDetailRepository, UnitOfWork, OutputPort, Validators) = 
+            (orderRepository, orderDetailRepository, unitOfWork, outputPort,validators);
+
+        public async Task Handle(CreateOrderParams Order)
         {
+            CreateOrderValidator validation = new CreateOrderValidator();
+            validation.Validate(Order);
+
+            await Validator<CreateOrderParams>.Validate(Order, Validators);
+
             Order order = new Order
             {
-                CustomerId = request.RequestData.CustomerId,
+                CustomerId = Order.CustomerId,
                 OrderDate = DateTime.Now,
-                ShipAddress = request.RequestData.ShipAddress,
-                ShipCity = request.RequestData.ShipCity,
-                ShipCountry = request.RequestData.ShipCountry,
-                ShipPostalCode = request.RequestData.ShipPostalCode,
+                ShipAddress = Order.ShipAddress,
+                ShipCity = Order.ShipCity,
+                ShipCountry = Order.ShipCountry,
+                ShipPostalCode = Order.ShipPostalCode,
                 ShippingType = CrearOrden.Entities.Enums.ShippingType.Road,
                 DiscountType = CrearOrden.Entities.Enums.DiscountType.Percentage,
                 Discount = 10
             };
             OrderRepository.Create(order);
-            foreach (var item in request.RequestData.OrderDetails)
+            foreach (var item in Order.OrderDetails)
             {
                 OrderDetailRepository.Create(new OrderDetail
                 {
@@ -53,7 +66,7 @@ namespace CreateOrden.UseCases.CreateOrder
             {
                 throw new GeneralException("Error al crear la orden", ex.Message);
             }
-            request.OutputPort.Handle(order.Id);
+            await OutputPort.Handle(order.Id);
         }
 
     }

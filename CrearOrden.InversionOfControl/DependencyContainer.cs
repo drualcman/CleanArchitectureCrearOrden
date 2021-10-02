@@ -1,10 +1,12 @@
 ﻿using CrearOrden.Entities.Interfaces;
+using CrearOrden.Presenters;
 using CrearOrden.Repositories.EFCore.DataContext;
 using CrearOrden.Repositories.EFCore.Repositories;
-using CreateOrden.UseCases.Common.Behaviors;
+using CrearOrden.UseCases.Ports.CreateOrder;
+using CreateOrden.UseCases.Common.Validators;
 using CreateOrden.UseCases.CreateOrder;
 using FluentValidation;
-using MediatR;
+//using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,9 +25,11 @@ namespace CrearOrden.InversionOfControl
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddMediatR(typeof(CreateOrderHandlerInteractor));
+            //services.AddMediatR(typeof(CreateOrderHandlerInteractor));
             services.AddValidatorsFromAssembly(typeof(CreateOrderValidator).Assembly);
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddScoped<ICreateOrderInputPort, CreateOrderHandlerInteractor>();
+            services.AddScoped<ICreateOrderOutputPort, CreateOrderPresenter>();
             return services;
         }
     }
