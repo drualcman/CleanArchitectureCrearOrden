@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplication Busines Rules", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces Adapters", "Interfaces Adapters", "{02E83B90-29F1-4021-B04B-3541C82A3112}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framworks Adapters", "Framworks Adapters", "{26C43010-30A3-4848-8459-542D1F42B65B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks Adapters", "Frameworks Adapters", "{26C43010-30A3-4848-8459-542D1F42B65B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gatways", "Gatways", "{3B474AE6-AF28-474F-8C17-B7B8D85C5CCF}"
 EndProject
@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrearOrden.Controllers", "C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{DCEBB3AE-F095-4C99-B764-0F7AB6D64440}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrearOrden.UseCases.Ports", "CrearOrden.UseCases.Ports\CrearOrden.UseCases.Ports.csproj", "{DF533FBD-ED9B-461D-B411-88AF27D6EA5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrearOrden.UseCases.Ports", "CrearOrden.UseCases.Ports\CrearOrden.UseCases.Ports.csproj", "{DF533FBD-ED9B-461D-B411-88AF27D6EA5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

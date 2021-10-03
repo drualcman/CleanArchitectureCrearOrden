@@ -30,9 +30,6 @@ namespace CreateOrden.UseCases.CreateOrder
 
         public async Task Handle(CreateOrderParams Order)
         {
-            CreateOrderValidator validation = new CreateOrderValidator();
-            validation.Validate(Order);
-
             await Validator<CreateOrderParams>.Validate(Order, Validators);
 
             Order order = new Order
