@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrearOrden.Presenters\CrearOrden.Presenters.csproj" />
+    <ProjectReference Include="..\CrearOrden.UseCasesDTOs\CrearOrden.UseCasesDTOs.csproj" />
+    <ProjectReference Include="..\CreateOrden.UseCases\CreateOrden.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>
