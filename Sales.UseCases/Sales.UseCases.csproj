@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sales.Entities\Sales.Entities.csproj" />
+    <ProjectReference Include="..\Sales.Events\Sales.Events.csproj" />
+    <ProjectReference Include="..\Sales.UseCasesPorts\Sales.UseCasesPorts.csproj" />
+  </ItemGroup>
+
+</Project>
