@@ -12,6 +12,6 @@ namespace Sales.Entities.Exceptions
         public GeneralException() { }
         public GeneralException(string message) : base(message) { }
         public GeneralException(string message, Exception inner) : base(message, inner) { }
-        protected GeneralException(string title, string detail) : base(title) => Detail = detail;
+        public GeneralException(string title, string detail) : base(title) => Detail = detail;
     }
 }

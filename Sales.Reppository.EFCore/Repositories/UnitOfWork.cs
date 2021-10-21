@@ -30,7 +30,12 @@ namespace Sales.Reppository.EFCore.Repositories
             {
                 Logger.Log(ex.InnerException?.Message ?? ex.Message);
                 throw new DataBaseUpdateException(ex.InnerException?.Message ?? ex.Message,
-                    ex.Entries.Select(e => new KeyValuePair<string, string>(e.GetType().Name,ex.Message)).ToList());
+                    ex.Entries.Select(e => e.GetType().Name).ToList());
+            }
+            catch  (Exception ex)
+            {
+                Logger.Log(ex.Message);
+                throw new GeneralException(ex.Message);
             }
             return result;
         }
