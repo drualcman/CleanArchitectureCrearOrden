@@ -28,7 +28,12 @@ namespace Sales.Reppository.EFCore.Repositories
             };
             foreach (CreateOrderDetailDto product in orderDto.OrderDetails)
             {
-                order.Add(product.ProductId, product.UnitPrice, product.Quantity);
+                order.Add(new SaleDetail
+                {
+                    ProductId = product.ProductId,
+                    UnitPrice = product.UnitPrice,
+                    Quantity = product.Quantity
+                });
             }
             Context.Add(order);
             return order;
