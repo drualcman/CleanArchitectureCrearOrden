@@ -26,7 +26,7 @@ namespace Sales.Entities.POCOs
         public void Add(int productId, decimal unitPrice, short quantity) =>
             OrderDetails.Add(new SaleDetail
             {
-                OrderId = productId,
+                ProductId = productId,
                 UnitPrice = unitPrice,
                 Quantity = quantity,
                 Order = this

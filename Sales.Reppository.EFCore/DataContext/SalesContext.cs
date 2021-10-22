@@ -28,10 +28,10 @@ namespace Sales.Reppository.EFCore.DataContext
             modelBuilder.Entity<SaleOrder>().Property(p => p.ShipCity).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<SaleOrder>().Property(p => p.ShipCountry).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<SaleOrder>().Property(p => p.ShipPostalcode).HasMaxLength(10);
-            modelBuilder.Entity<SaleDetail>().HasKey(sd => new { sd.OrderId, sd.ProdcutId });
+            modelBuilder.Entity<SaleDetail>().HasKey(sd => new { sd.OrderId, sd.ProductId});
 
             modelBuilder.Entity<SaleOrder>().HasOne<Customer>().WithMany().HasForeignKey(o => o.CustomerId);
-            modelBuilder.Entity<SaleDetail>().HasOne<Product>().WithMany().HasForeignKey(d => d.ProdcutId);
+            modelBuilder.Entity<SaleDetail>().HasOne<Product>().WithMany().HasForeignKey(d => d.ProductId);
 
             modelBuilder.Entity<Product>().HasData(
                 new Product { Id = 1, Name = "Chai" },

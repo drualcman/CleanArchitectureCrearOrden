@@ -17,6 +17,9 @@ namespace Sales.DTOs.CreateOrder
                 .MinimumLength(3).WithMessage("Debe especificar al menos 3 caracteres del nombre de la ciudad.");
             RuleFor(o => o.ShipCountry).NotEmpty().WithMessage("Debe proporcionar el pais de envio.")
                 .MinimumLength(3).WithMessage("Debe especificar al menos 3 caracteres del nombre del pais.");
+            RuleFor(o => o.OrderDetails).Cascade(CascadeMode.Stop)      //para parar la validacion despues del algun error
+                .NotNull().WithMessage("Debe de especificar algun producto.")
+                .NotEmpty().WithMessage("Debe de especificar algun producto.");
             RuleForEach(o => o.OrderDetails).SetValidator(new CreateOrderDetailDtoValidator());
         }
     }

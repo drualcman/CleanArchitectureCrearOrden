@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sales.Controllers\Sales.Controllers.csproj" />
+    <ProjectReference Include="..\Sales.Loggers\Sales.Loggers.csproj" />
+    <ProjectReference Include="..\Sales.Mail\Sales.Mail.csproj" />
+    <ProjectReference Include="..\Sales.Repository.IoC\Sales.Repository.IoC.csproj" />
+    <ProjectReference Include="..\Sales.UseCases\Sales.UseCases.csproj" />
+    <ProjectReference Include="..\Sales.WebExceptionPresenters\Sales.WebExceptionPresenters.csproj" />
+  </ItemGroup>
+
+</Project>

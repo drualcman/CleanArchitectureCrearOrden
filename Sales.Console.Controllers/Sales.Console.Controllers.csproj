@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Sales.Presenters\Sales.Presenters.csproj" />
+		<ProjectReference Include="..\Sales.UseCasesPorts\Sales.UseCasesPorts.csproj" />
+		<ProjectReference Include="..\Sales.Views\Sales.Views.csproj" />
+	</ItemGroup>
+
+</Project>

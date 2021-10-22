@@ -115,7 +115,7 @@ namespace Sales.Reppository.EFCore.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProdcutId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<short>("Quantity")
@@ -124,9 +124,9 @@ namespace Sales.Reppository.EFCore.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("OrderId", "ProdcutId");
+                    b.HasKey("OrderId", "ProductId");
 
-                    b.HasIndex("ProdcutId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -192,7 +192,7 @@ namespace Sales.Reppository.EFCore.Migrations
 
                     b.HasOne("Sales.Entities.POCOs.Product", null)
                         .WithMany()
-                        .HasForeignKey("ProdcutId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

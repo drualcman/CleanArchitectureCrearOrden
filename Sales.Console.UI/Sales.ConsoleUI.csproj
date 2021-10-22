@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sales.Console.Controllers\Sales.Console.Controllers.csproj" />
+    <ProjectReference Include="..\Sales.Entities\Sales.Entities.csproj" />
+    <ProjectReference Include="..\Sales.Events\Sales.Events.csproj" />
+    <ProjectReference Include="..\Sales.Loggers\Sales.Loggers.csproj" />
+    <ProjectReference Include="..\Sales.Mail\Sales.Mail.csproj" />
+    <ProjectReference Include="..\Sales.Presenters\Sales.Presenters.csproj" />
+    <ProjectReference Include="..\Sales.Repository.IoC\Sales.Repository.IoC.csproj" />
+    <ProjectReference Include="..\Sales.UseCases\Sales.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>

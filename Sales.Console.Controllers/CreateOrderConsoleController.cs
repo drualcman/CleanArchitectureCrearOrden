@@ -6,7 +6,7 @@ using Sales.Presenters;
 using Sales.ViewModels;
 using Sales.Views;
 
-namespace Sales.Controllers
+namespace Sales.Console.Controllers
 {
     public class CreateOrderConsoleController
     {
