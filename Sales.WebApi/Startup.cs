@@ -44,6 +44,15 @@ namespace Sales.WebApi
             services.AddRepositories(Configuration);
             services.AddUseCases();
             services.AddPresenters();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default", config =>
+                {
+                    config.AllowAnyMethod();
+                    config.AllowAnyOrigin();
+                    config.AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +68,7 @@ namespace Sales.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("default");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

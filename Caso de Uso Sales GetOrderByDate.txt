@@ -1,0 +1,15 @@
+Caso de uso Obtener listado de ordenes de compra
+Datos de entrada:
+- fecha
+
+Flujo primario
+1. El usuario envia la solicitud "Obtener listao de ordenes de compra" especificando una fecha.
+2. El sistema valida que la fecha sea meno o igual a la fecha actual.
+3. El sistem obtiene el listado de ordenes de compra creadas en la fecha especificada
+4. El sistema registra la ccion "Obtener listado de ordenes de compra" con fines historicos
+5. El sistema devuelve al usuario el listado de las ordenes de compra.
+
+Flujo alterno: Error de validacion.
+1. El procesamiento de la solicitud es cancelado
+2. El error es registrado en la bitacore de errore del sistema.
+3. El sistema muestra el error al usuario.

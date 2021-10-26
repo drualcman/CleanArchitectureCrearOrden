@@ -1,0 +1,33 @@
+Caso de Uso
+Historia de usuario: Crear orden de compra
+"Como usuario del sistema, deseo poder crear una orden de compra para solicitar productos del almacén."
+
+Caso de uso: Crear orden de compra
+
+Datos de entrada:
+* Identificador del cliente
+* Dirección de envío
+* Ciudad de envío
+* País de envío
+* Código postal de envío
+* Lista de productos:
+* Identificador del producto
+* Precio
+* Cantidad
+
+Flujo primario
+1. El usuario envía la solicitud "Crear orden de compra" con los datos de entrada.
+2. El sistema valida los datos.
+3. El sistema registra la orden de compra.
+4. El sistema registra la acción "Crear orden de compra" con fines históricos. (Log de dominio)
+5. Cuando el número de productos de la orden sea mayor que 3, el sistema enviará un correo de notificación de "Orden especial creada".
+6. El sistema confirma al usuario que su solicitud ha sido procesada notificándole el número de la orden creada.
+
+Flujo alterno: Error de validación.
+1. El procesamiento de la solicitud es cancelado.
+2. El error es registrado en la bitácora de errores del sistema.
+3. El sistema muestra el error al usuario.
+
+Consideraciones:
+* NorthWind maneja 4 tipos de transporte: Marítimo, Aéreo, Ferroviario y Terrestre. El tipo de transporte predeterminado esTerrestre.
+* NorthWind maneja 2 formas para especificar descuentos: Mediante porcentaje y mediante cantidades absolutas. El descuento predeterminado de una compra es de 10%.
