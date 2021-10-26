@@ -1,0 +1,105 @@
+﻿@page "/"
+
+<h1>Add new order!</h1>
+
+<EditForm Model="Order" OnValidSubmit="Send">
+	<FluentValidationValidator />
+	<ValidationSummary />
+
+	<div>
+		<div class="form-group">
+			<label for="customerId">Id del cliente</label>
+			<InputText class="form-control" 
+					   placeholder="Id del cliente" 
+					   @bind-Value="Order.CustomerId"></InputText>
+			<ValidationMessage For="()=>Order.CustomerId" />
+		</div>
+		<div class="form-group">
+			<label for="shipAddress">Direccion</label>
+			<InputText class="form-control" 			
+					   placeholder="Direccion" 
+					   @bind-Value="Order.ShipAddress"></InputText>
+			<ValidationMessage For="()=>Order.ShipAddress" />
+		</div>
+		<div class="form-group">
+			<label for="shipCity">Ciudad</label>
+			<InputText class="form-control" 			
+					   placeholder="Ciudad" 
+					   @bind-Value="Order.ShipCity"></InputText>
+			<ValidationMessage For="()=>Order.ShipCity" />
+		</div>
+		<div class="form-group">
+			<label for="shipCountry">Pais</label>
+			<InputText class="form-control" 			
+					   placeholder="Pais" 
+					   @bind-Value="Order.ShipCountry"></InputText>
+			<ValidationMessage For="()=>Order.ShipCountry" />
+		</div>
+		<div class="form-group">
+			<label for="shipPostacode">Codigo Postal</label>
+			<InputText class="form-control" 			
+					   placeholder="Codigo Postal" 
+					   @bind-Value="Order.ShipPostacode"></InputText>
+			<ValidationMessage For="()=>Order.ShipPostacode" />
+		</div>
+	</div>
+	<hr/>
+	<div>
+		<div class="row">
+			<div class="col">Id de producto</div>
+			<div class="col">Precio</div>
+			<div class="col">Cantidad</div>
+		</div>		
+		@foreach (CreateOrderDetailDto item in Order.OrderDetails)
+		{
+		<div class="row">
+			<div class="col">
+				<InputNumber class="form-control"
+						   placeholder="Id de producto"
+						   @bind-Value="item.ProductId"/>
+				<ValidationMessage For="()=> item.ProductId"/>
+			</div>
+			<div class="col">
+				<InputNumber class="form-control"
+						   placeholder="Unit price"
+						   @bind-Value="item.UnitPrice"/>
+				<ValidationMessage For="()=> item.UnitPrice"/>
+			</div>
+			<div class="col">
+				<InputNumber class="form-control"
+						   placeholder="Qty"
+						   @bind-Value="item.Quantity"/>
+				<ValidationMessage For="()=> item.Quantity"/>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="row p-3">
+		<div class="col">
+			<button class="btn btn-primary" type="button" @onclick="AddProduct">
+				Agregar Producto
+			</button>
+		</div>		
+		<div class="col">
+			<button class="btn btn-primary" type="submit">
+				Enviar
+			</button>
+		</div>
+	</div>
+</EditForm>
+<hr/>
+<div>@Message</div>
+@if (Exception is not null)
+{
+	<div>@Exception.Problems.Title</div>
+	<div>@Exception.Problems.Detail</div>
+	if (Exception.Problems.InvalidParams is not null)
+	{
+		foreach (var failure in Exception.Problems.InvalidParams)
+		{
+	<div>@failure.Key : @failure.Value</div>		
+		}
+	}
+}
+
