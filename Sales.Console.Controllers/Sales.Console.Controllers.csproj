@@ -5,6 +5,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Sales.BaseControllers\Sales.BaseControllers.csproj" />
 		<ProjectReference Include="..\Sales.Presenters\Sales.Presenters.csproj" />
 		<ProjectReference Include="..\Sales.UseCasesPorts\Sales.UseCasesPorts.csproj" />
 		<ProjectReference Include="..\Sales.Views\Sales.Views.csproj" />

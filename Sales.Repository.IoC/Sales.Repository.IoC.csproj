@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sales.Repository.ADONET\Sales.Repository.ADONET.csproj" />
     <ProjectReference Include="..\Sales.Reppository.EFCore\Sales.Reppository.EFCore.csproj" />
   </ItemGroup>
 

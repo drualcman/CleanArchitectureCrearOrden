@@ -6,6 +6,9 @@ using Sales.UseCases.Common.Interfaces;
 using Sales.Reppository.EFCore.Repositories;
 using Sales.Entities.Interfaces;
 using Microsoft.Extensions.Configuration;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using Sales.Repository.ADONET;
 
 namespace Sales.Repository.IoC
 {
@@ -21,6 +24,10 @@ namespace Sales.Repository.IoC
             services.AddScoped<IOrderWritableRepository, OrderWritableRepository>();
             services.AddScoped<ILogWritableRepository, LogWritableRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IDbConnection>(provides => new SqlConnection(configuration.GetConnectionString("SalesDb")));
+            services.AddScoped<IOrderReadableRepository, OrderReadableRepository>();
+
             return services;
         }
     }

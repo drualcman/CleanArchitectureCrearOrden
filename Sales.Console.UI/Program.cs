@@ -5,7 +5,9 @@ using Sales.Mail;
 using Sales.Presenters;
 using Sales.Repository.IoC;
 using Sales.UseCases;
+using Sales.UseCasesPorts.Common;
 using Sales.UseCasesPorts.CreateOrder;
+using Sales.UseCasesPorts.GetOrdersByDate;
 using Sales.Views;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,8 @@ namespace Sales.ConsoleUI
             });
 
             System.Console.WriteLine("Hello World!");
-            CreateOrder();
+            //CreateOrder();
+            ListOrdersByDate();
         }
 
         static void CreateOrder()
@@ -54,6 +57,26 @@ namespace Sales.ConsoleUI
                 CreateOrderConsoleView view = controller.CreateOrder(order).Result;
                 view.ExecuteResult();
                 
+            }
+            catch (Exception ex)
+            {
+                new ErrorConsoleView(ex).ExecuteResult();
+            }
+        }
+
+        static void ListOrdersByDate()
+        {
+            GetOrdersByDateController controller = new GetOrdersByDateController(
+                ServiceContainer.GetService<IGetOrdersByDateInputPort>(),
+                ServiceContainer.GetService<IGetOrdersOutputPort>()
+                );
+
+            DateTime date = DateTime.Today;
+            try
+            {
+
+                OrdersConsoleView view = controller.GetOrderByDate(date).Result;
+                view.ExecuteResult();
             }
             catch (Exception ex)
             {
