@@ -67,7 +67,7 @@ namespace Sales.Repository.ADONET
                                 UnitPrice = Convert.ToDecimal(reader["UnitPrice"]),
                                 Quantity = Convert.ToInt16(reader["Quantity"])
                             });
-                    } while (hasOrders = reader.Read() && Convert.ToInt32(reader["ID"]) == currentId);
+                    } while ((hasOrders = reader.Read()) && Convert.ToInt32(reader["ID"]) == currentId);
                     
                     orders.Add(order);
 
